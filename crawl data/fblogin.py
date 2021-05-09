@@ -49,8 +49,8 @@ user_list = browser.find_elements_by_xpath("//div[@data-visualcompletion='ignore
 
 for user in user_list:
     print("user: ", user)
-    poster = user.find_element_by_class_name("a.oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 nc684nl6 p7hjln8o kvgmc6g5 cxmmr5t8 oygrvhab hcukyx3x jb3vyjys rz4wbd8a qt6c0cv9 a8nywdso i1ao9s8h esuyzwwr f1sip0of lzcic4wl oo9gr5id gpro0wi8 lrazzd5p")
-    #print(poster.text)
+    poster = user.find_element_by_class_name("qzhwtbm6 knvmm38d")
+    print(poster.text)
 
 print("####################################")
 print("Emotion:" , user_list)
