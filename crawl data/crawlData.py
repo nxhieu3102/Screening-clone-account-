@@ -33,7 +33,7 @@ sleep(2)
 # 2a. Điền thông tin vào ô user và pass
 
 txtUser = browser.find_element_by_id("email")
-txtUser.send_keys(tk) # <---  Điền username thật của các bạn vào đây
+txtUser.send_keys(tk)
 
 txtPass = browser.find_element_by_id("pass")
 txtPass.send_keys(password)
@@ -46,92 +46,40 @@ sleep(3)
 
 linkPost = [
     "temp",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671569730996",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286690639729089",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671689730984",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671233064363",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668183064668",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668343064652",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286755376389282",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671373064349",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671326397687",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671499731003",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671159731037",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671179731035",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668213064665",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668289731324",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668193064667",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671473064339",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668226397997",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668349731318",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671529731000",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671583064328",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671346397685",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671513064335",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668336397986",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286726856392134",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671623064324",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671649730988",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668233064663",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671683064318",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671723064314",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668263064660",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671733064313",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668413064645",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671756397644",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668429731310",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668516397968",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286671823064304",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668599731293",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668479731305",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286826399715513",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668476397972",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286668619731291",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286676089730544/286795356385284",
-    "https://www.facebook.com/asteri.theprom/photos/pcb.286669693064517/286826876382132"    
-
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549361721921148",
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549361828587804",
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549362111921109",
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549360701921250",
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549360438587943",
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549360411921279",
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549360628587924",
+    "https://www.facebook.com/C3KT-PROM-NIGHT-756654841191844/photos/pcb.1549372048586782/1549362748587712"
 ]
 browser.get(linkPost[sbd])
 
 sleep(4)
 
-emotion = browser.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div/div[1]/div/span/div/span[1]/span/span")
+emotion = browser.find_element_by_xpath("/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[2]/div/div[1]/div/div[1]/div[2]/div/div[1]/div/div[1]/div/span/div/span[1]/span/span")
 emotion.click()
 
-sleep(5)
 
 urlFb = []
 nameFb = []
 
+fdasdf = input('Press ENTER to continute...')
 
-Width = GetSystemMetrics(0)
-Height = GetSystemMetrics(1)
+user_list = browser.find_elements_by_xpath("//div[@class='ue3kfks5 pw54ja7n uo3d90p7 l82x9zwi a8c37x1j']")
 
-sleep(2)
-pyautogui.moveTo(Width/2, Height/2)
-sleep(0.5)
-
-for i in range(0 , 35):
-    pyautogui.scroll(-800)
-    sleep(1.5)
-
-for i in range(0 , 0):
-    pyautogui.scroll(-800)
-    sleep(3)
-
-user_list = browser.find_elements_by_xpath("//div[@class='j83agx80 cbu4d94t ew0dbk1b irj2b8pg']")
-user_list.pop(0)
+print('Tong so like: ', len(user_list))
+print('LOADING...')
 
 typeAccount = []
 
 id = 1
 
 for user in user_list:
-    if id == len(user_list) - 3:
-        break
-    
     user = user.find_elements_by_class_name('qzhwtbm6.knvmm38d')
-
+    
     curUser = user[0]
 
     if(len(user) == 1): typeAccount.append('Clone')
@@ -153,6 +101,8 @@ df = pd.DataFrame(Data, columns = ['Name', 'Facebook link', 'Real or Clone'])
 fileName = 'C:/Users/nguye/Desktop/' + str(sbd) + '.xlsx'
 df.to_excel (fileName, index = False, header=True)
 
+print('DONE!!!')
 
-#print("Emotion:" , user_list)
-#print("Count: ", user_list.length)
+sleep(3)
+
+browser.close()

@@ -23,10 +23,21 @@ option.add_experimental_option("prefs", {
 browser  = webdriver.Chrome(chrome_options=option, executable_path="C:/Users/nguye/Downloads/chromedriver_win32/chromedriver.exe")
 browser.get("https://id.atpsoftware.vn/")
 
-linkFb = browser.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div/div/div[2]/form/div/input")
-linkFb.send_keys("https://www.facebook.com/khanhduykt") 
-sleep(1)
-linkFb.send_keys(Keys.ENTER)
+urlFb = []
 
-uid = browser.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div/div/div[2]/textarea")
-print(uid.text)
+for i in range(0 , 100):
+    urlFb.append("https://www.facebook.com/khanhduykt")
+
+text = []
+for curUrl in urlFb:
+    linkFb = browser.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div/div/div[2]/form/div/input")
+    linkFb.send_keys(curUrl) 
+    sleep(1)
+    linkFb.send_keys(Keys.ENTER)
+    sleep(1)
+    uid = browser.find_element_by_xpath("/html/body/div[1]/div[3]/div[2]/div[2]/div/div/div[2]/textarea")
+    text.append(uid.text)
+    linkFb.send_keys(curUrl)
+
+print(text)
+print(len(text))
