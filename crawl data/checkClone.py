@@ -1,4 +1,3 @@
-# Reading an excel file using Python
 import xlrd
 from selenium import webdriver
 from time import sleep
@@ -10,45 +9,6 @@ import pandas as pd
 import getpass
 import stdiomask
 import math
- 
-# Give the location of the file
-
-tk = input("Nhap tai khoan: ")
-password = stdiomask.getpass()
-sbd = int(input('sbd :'))
-
-loc = ('C:/Users/nguye/Desktop/' + str(sbd) + '.xlsx')
- 
-# To open Workbook
-wb = xlrd.open_workbook(loc)
-sheet = wb.sheet_by_index(0)
- 
-# For row 0 and column 0
-
-nameFb = []
-urlFb = []
-typeAccount = []
-check = []
-
-soAccConLai = 999
-
-for i in range(1 , sheet.nrows):
-    nameFb.append(str(sheet.cell_value(i, 0)))
-    urlFb.append(str(sheet.cell_value(i, 1)))
-    typeAccount.append(str(sheet.cell_value(i, 2)))
-    
-if sheet.ncols == 4:
-    for i in range(1 , sheet.nrows):
-        check.append(sheet.cell_value(i , 3))
-        if check[i - 1] == 1 : 
-            soAccConLai = min(soAccConLai , i)
-
-else :
-    for i in range(1 , sheet.nrows):
-        if typeAccount[i - 1] == 'Real': 
-            check.append(1)
-            soAccConLai = min(soAccConLai , i)
-        else : check.append(0)
 
 option = Options()
 
@@ -56,87 +16,125 @@ option.add_argument("--disable-infobars")
 option.add_argument("start-maximized")
 option.add_argument("--disable-extensions")
 
-# Pass the argument 1 to allow and 2 to block
 option.add_experimental_option("prefs", { 
     "profile.default_content_setting_values.notifications": 2
 })
 
+browser = webdriver.Chrome(chrome_options=option, executable_path="C:/Users/nguye/Downloads/chromedriver_win32/chromedriver.exe")
 
-browser  = webdriver.Chrome(chrome_options=option, executable_path="C:/Users/nguye/Downloads/chromedriver_win32/chromedriver.exe")
+NameFb = []
+UrlFb = []
+TypeAccount = []
+TypeClone = ['Real' , 'Clone']
+check = []
+id
+Done = 1
+Yet = 0
 
-browser.get("http://facebook.com")
+def openBrowserAndLogin():
+    browser.get("http://facebook.com")
+    sleep(5)
 
-sleep(2)
+    UserName = input("Nhap tai khoan: ")
+    PassWord = stdiomask.getpass()
+    txtUserName = browser.find_element_by_id("email")
+    txtUserName.send_keys(UserName)
+    txtPassWord = browser.find_element_by_id("pass")
+    txtPassWord.send_keys(PassWord)
+    txtPassWord.send_keys(Keys.ENTER)
 
-txtUser = browser.find_element_by_id("email")
-txtUser.send_keys(tk)
+    sleep(5)
 
-txtPass = browser.find_element_by_id("pass")
-txtPass.send_keys(password)
+TotalAccountRemaing = 999;
 
-# 2b. Submit form
+def openAndLoadData():
+    global id
+    id = int(input('sbd :'))
+    ExcelFileLocaiton = ('C:/Users/nguye/Desktop/' + str(id) + '.xlsx')
+    WorkBook = xlrd.open_workbook(ExcelFileLocaiton)
+    Sheet = WorkBook.Sheet_by_index(0)
 
-txtPass.send_keys(Keys.ENTER)
+    for i in range(1 , Sheet.nrows):
+        NameFb.append(str(Sheet.cell_value(i, 0)))
+        UrlFb.append(str(Sheet.cell_value(i, 1)))
+        TypeAccount.append(str(Sheet.cell_value(i, 2)))
+
+    if Sheet.ncols == 4:
+        for i in range(1 , Sheet.nrows):
+            check.append(Sheet.cell_value(i , 3))
+            if check[i - 1] == Done : 
+                TotalAccountRemaing = min(TotalAccountRemaing , i)
+    else :
+        for i in range(1 , Sheet.nrows):
+            if TypeAccount[i - 1] == 'Real': 
+                check.append(Done)
+                TotalAccountRemaing = min(TotalAccountRemaing , i)
+            else : check.append(0)
 
 sleep(3)
 
-typeClone = ['Real' , 'Clone']
+TotalClone = 0
 
-totalClone = 0
+def processData():
+    global TotalAccountRemaing, TotalClone
+    for user in range(0 , len(UrlFb)):
+        if check[user] == Done: break
+        url = UrlFb[user]
+        browser.get(url)
 
-
-for i in range(0 , len(urlFb)):
-    if check[i] == 1: break
-    url = urlFb[i]
-    browser.get(url)
-
-    print("0 : Real")
-    print("1 : Clone")
-    print("2 : stop and save")
-
-    t = str(input("Type : "))
-    
-    while t != '1' and t != '2' and t != '0':
         print("0 : Real")
         print("1 : Clone")
-        print("2 : stop and save") 
-        t = str(input("Again: "))
+        print("2 : stop and save")
+
+        TypeAccountAfter = str(input("Type : "))
+        
+        while TypeAccountAfter != '1' and TypeAccountAfter != '2' and TypeAccountAfter != '0':
+            print("0 : Real")
+            print("1 : Clone")
+            print("2 : stop and save") 
+            TypeAccountAfter = str(input("Again: "))
+        
+        TypeAccountAfter = int(TypeAccountAfter)
+
+        if TypeAccountAfter == 2: 
+            break
+        else : 
+            TypeAccount[user] = TypeClone[TypeAccountAfter]
+            check[user] = Done
+
+        if TypeAccountAfter == Done:
+            TotalClone += 1
+
+        TotalAccountRemaing -= 1
+
+        print("So acc con lai : " , TotalAccountRemaing)
+        print("Tong acc clone : ", TotalClone)
     
-    t = int(t)
+def saveData():
+    Data = {'Name': NameFb,
+            'Facebook link': UrlFb,
+            'Type': TypeAccount,
+            'Check': check
+            }
 
-    if t == 2: 
-        break
-    else : 
-        typeAccount[i] = typeClone[t]
-        check[i] = 1
+    df = pd.DataFrame(Data, columns = ['Name', 'Facebook link', 'Type' , 'Check'])
+    ExcelFileLocaiton = ('C:/Users/nguye/Desktop/' + str(id) + '.xlsx')
+    df.to_excel (ExcelFileLocaiton, index = False, header=True)
 
-    if t == 1:
-        totalClone += 1
+    sleep(2)
 
-    soAccConLai -= 1
+    print("So acc con lai : " , TotalAccountRemaing)
 
-    print("So acc con lai : " , soAccConLai)
-    print("Tong acc clone : ", totalClone)
-    
+    print('Tong acc clone : ' , TotalClone)
 
-Data = {'Name': nameFb,
-        'Facebook link': urlFb,
-        'Type': typeAccount,
-        'Check': check
-        }
+    print('Ket Thuc !!')
 
-df = pd.DataFrame(Data, columns = ['Name', 'Facebook link', 'Type' , 'Check'])
-fileName = 'C:/Users/nguye/Desktop/' + str(sbd) + '.xlsx'
-df.to_excel (fileName, index = False, header=True)
+    sleep(2)
 
-sleep(2)
+    browser.close()
 
-print("So acc con lai : " , soAccConLai)
-
-print('Tong acc clone : ' , totalClone)
-
-print('Ket Thuc !!')
-
-sleep(2)
-
-browser.close()
+if __name__ == "__main__":
+    openBrowserAndLogin()
+    openAndLoadData()
+    processData()
+    saveData()
